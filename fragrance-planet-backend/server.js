@@ -6,7 +6,17 @@ const cors = require('cors'); // import cors to handle cross-origin requests
 
 // import route handlers for colognes, users, favorites, and recommendations
 const cologneRoutes = require('./routes/cologneRoutes'); 
-const userRoutes = require('./routes/userRoutes'); 
+const userRoutes = require('./routes/userRoutes');
+ // node.js opens routes/userRoutes.js
+ // runs the file
+ // sees this module.exports = router and returns the router object
+ // stores inside userRoutes variable
+ // so now, userRoutes = router from userRoutes.js
+
+// reads it, gets whatevere is exported from router (module.exports = router)
+// stores in userRoutes (this one: const userRoutes)
+
+
 const favoriteRoutes = require('./routes/favoritesRoutes'); 
 const recommendationRoutes = require('./routes/recommendationRoutes'); 
 
@@ -32,7 +42,15 @@ app.use('/images', express.static(path.join(__dirname, 'public/images')));
 app.use('/api/colognes', cologneRoutes);
 
 // setup routes for user registration and login
-app.use('/api/users', userRoutes);
+// mounting 
+app.use('/api/users', userRoutes); 
+// whenever a request starts with /api/users, 
+// send it to userRoutes router
+// POST /api/users/register -> hits router.post('/register')
+// when router says router.post('/register') => full path:
+//    /api/users + /register = /api/users/register
+
+// /api/users/register goes to router.post('/register)
 
 // setup routes for adding/removing favorites (protected by jwt authentication)
 app.use('/api/favorites', authenticateToken, favoriteRoutes);

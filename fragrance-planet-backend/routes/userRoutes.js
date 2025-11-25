@@ -1,3 +1,8 @@
+//HIS ENTIRE FILE BUILDS a router object
+// that has 2 routes
+//  router.post('/register')
+//  router.post('/login')
+
 const express = require('express'); // import express library for creating routes
 const router = express.Router(); // create a router instance
 const bcrypt = require('bcryptjs'); // import bcrypt for hashing passwords
@@ -5,6 +10,8 @@ const jwt = require('jsonwebtoken'); // import jwt for generating tokens
 const db = require('../config/db'); // import database connection
 
 // register a new user
+// only post requests will active these routes
+// must send post request from frontend
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body; // get username, email, and password from request body
 
@@ -88,4 +95,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
+//export this router so another file can use it
+// giving this router to the outisde 
 module.exports = router; // export the router for use in the app
+
